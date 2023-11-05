@@ -1,0 +1,17 @@
+apiVersion: V1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    name: myapp-pod
+    purpose: unknown
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 83

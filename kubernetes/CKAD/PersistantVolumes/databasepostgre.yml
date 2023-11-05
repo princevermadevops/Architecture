@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  serviceName: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      volumes:
+        - name: database-data
+          persistentVolumeClaim:
+            claimName: database-pvc
+      containers:
+        - name: database-container
+          image: postgres:latest
+          volumeMounts:
+            - name: database-data
+              mountPath: /var/lib/postgresql/data
