@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube
+spec:
+  selector:
+    matchLabels:
+      app: kube
+  template:
+    metadata:
+      labels:
+        app: kube
+    spec:
+      containers:
+      - name: kube
+        image: princevermadevops/mynodeimage-1
+        ports:
+        - containerPort: 8083
+        imagePullPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube
+  labels:
+    app: kube
+spec:
+  type: LoadBalancer
+  selector:
+    app: kube
+  ports:
+  - port: 8083
+    targetPort: 8083
+
+
